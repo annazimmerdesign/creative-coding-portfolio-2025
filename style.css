@@ -1,114 +1,295 @@
-/* --------------------------------------------------
-   GLOBAL PAGE STYLING
-   Animated light-blue background and base text styling
--------------------------------------------------- */
-body {
+/* Archival Collection Styling */
+
+:root {
+  --paper: #f5f1e3;
+  --aged-paper: #e8e4d8;
+  --ink: #2b2b2b;
+  --faded-ink: #5a5a5a;
+  --folder-tab: #d4c5a9;
+  --label-border: #8b7355;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+
+@font-face {
+  font-family: 'dippl_al';
+  src: url('dippl_al.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'FT88-Serif';
+  src: url('FT88-Serif.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'GOUDOSB';
+  src: url('GOUDOSB.ttf') format('truetype');
+}
+
+* {
   margin: 0;
-  font-family: 'Helvetica', sans-serif;
-
-  /* Soft animated blue gradient */
-  background: linear-gradient(135deg, #9bc28b, #94e6d4, #867ccc);
-  background-size: 200% 200%;
-  animation: bgShift 10s ease infinite;
-
-  color: #2a3a4a; /* Dark blue text */
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
-/* Background animation (moves the gradient slowly) */
-@keyframes bgShift {
-  0% { background-position: 0% 50%; }
-  60% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* --------------------------------------------------
-   HEADER / HERO SECTION
-   Large title + navigation bar
--------------------------------------------------- */
-.hero {
-  background: #314a3a;      /* Sky blue header */
-  color: white;             /* White text */
-  padding: 40px 20px;       /* Space around content */
-  text-align: center;
-  border-bottom: 5px solid #314a3a; /* Slightly darker blue stripe */
-}
-
-.hero h1 {
-  font-family: Garamond, serif;
-  margin: 0 0 15px;
-  font-size: 2.5rem;        /* Big title font */
-  letter-spacing: 2px;      /* Slight spacing for style */
-}
-
-/* Navigation links inside header */
-nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;   /* No underline by default */
-  font-weight: bold;
-}
-
-/* Underline when hovering over menu links */
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* --------------------------------------------------
-   MAIN GRID LAYOUT
-   Controls spacing between page sections
--------------------------------------------------- */
-main.grid {
-  display: grid;  /* Enables CSS Grid */
-  gap: 20px;      /* Space between cards */
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #d9d3c5;
+  color: var(--ink);
+  line-height: 1.6;
   padding: 20px;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,.02) 2px,
+      rgba(0,0,0,.02) 4px
+    );
 }
 
-/* --------------------------------------------------
-   CARD COMPONENT
-   White rounded content boxes with a blue shadow
--------------------------------------------------- */
-.card {
-  background: white;                      /* White card background */
-  border-radius: 14px;                    /* Rounded corners */
-  padding: 22px;                           /* Inner space */
-  box-shadow: 0 4px 18px rgba(0, 90, 150, 0.15); /* Soft blue shadow */
-  transition: transform 0.25s, box-shadow 0.25s; /* Smooth hover animation */
+/* Header - File Cabinet Tab */
+header.hero {
+  background-color: var(--folder-tab);
+  border: 2px solid var(--label-border);
+  border-bottom: none;
+  padding: 30px 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05);
 }
 
-/* Lift card upward slightly on hover */
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 26px rgba(0, 90, 150, 0.25);
+header.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 200px;
+  height: 15px;
+  background-color: var(--folder-tab);
+  border: 2px solid var(--label-border);
+  border-bottom: none;
+  transform: translateY(-100%);
+  border-radius: 8px 8px 0 0;
 }
 
-/* --------------------------------------------------
-   LINKS INSIDE CARDS & ASSIGNMENT LISTS
--------------------------------------------------- */
-.assignments a,
-.card a {
-  color: #0077cc;        /* Medium blue links */
+header.hero h1 {
+  font-family: 'GOUDOSB','Courier New', Courier, monospace;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--label-border);
+  padding-bottom: 10px;
+}
+
+/* Navigation - Index Cards */
+nav {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+nav a {
+  background-color: var(--aged-paper);
+  color: var(--ink);
   text-decoration: none;
-  font-weight: 600;       /* Slightly bolder */
-}
-
-/* Underline appears only when hovering */
-.assignments a:hover,
-.card a:hover {
-  text-decoration: underline;
-}
-
-/* --------------------------------------------------
-   FOOTER
-   Small transparent footer at bottom of page
--------------------------------------------------- */
-footer {
-  background: rgba(255, 255, 255, 0.5); /* Frosted-white strip */
-  text-align: center;
-  padding: 12px;
-  margin-top: 40px;
+  padding: 8px 20px;
+  border: 1px solid var(--label-border);
   font-size: 0.9rem;
-  backdrop-filter: blur(4px);           /* Soft blur effect */
-  border-top: 1px solid rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  box-shadow: 2px 2px 4px var(--shadow);
+}
+
+nav a:hover {
+  background-color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 6px var(--shadow);
+}
+
+/* Main Content - Folder Interior */
+main.grid {
+  background-color: var(--paper);
+  border: 2px solid var(--label-border);
+  border-top: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  min-height: 70vh;
+  box-shadow: 
+    5px 5px 15px var(--shadow),
+    inset 0 0 100px rgba(139, 115, 85, 0.03);
+}
+
+/* Collection Cards - Museum Labels */
+.card {
+  background-color: var(--aged-paper);
+  border: 3px double var(--label-border);
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 3px 3px 8px var(--shadow);
+  position: relative;
+}
+
+.card::before {
+  content: 'ACCESSION NO. ' attr(data-accession);
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 0.7rem;
+  color: var(--faded-ink);
+  letter-spacing: 0.1em;
+}
+
+.card h2 {
+  font-family: "GOUDOSB", Georgia, serif;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--label-border);
+  padding-bottom: 8px;
+  font-style: italic;
+}
+
+.card p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: var(--faded-ink);
+}
+
+.card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Only add arrows to list items */
+.card ul li {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.card ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--label-border);
+}
+
+/* Make sure links don't get arrows */
+.card ul li a {
+  padding-left: 0;
+  position: static;
+}
+
+.card ul li a::before {
+  display: none;
+}
+
+.card a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--label-border);
+  text-decoration-style: dotted;
+  transition: all 0.2s;
+}
+
+.card a:hover {
+  color: var(--label-border);
+  text-decoration-style: solid;
+}
+
+/* Intro Card Styling */
+.card.intro {
+  background-color: var(--paper);
+  border-style: solid;
+  border-width: 2px;
+}
+
+.card.intro img {
+  display: block;
+  margin: 20px auto;
+  border: 3px solid var(--label-border);
+  box-shadow: 3px 3px 8px var(--shadow);
+}
+
+/* p5.js Sketch Container */
+.card iframe {
+  width: 100%;
+  min-height: 600px;
+  border: 3px solid var(--label-border);
+  background-color: white;
+  box-shadow: inset 0 0 10px var(--shadow);
+}
+
+/* Footer - Archive Stamp */
+footer {
+  max-width: 1200px;
+  margin: 30px auto 0;
+  text-align: center;
+  padding: 20px;
+  background-color: var(--aged-paper);
+  border: 2px dashed var(--label-border);
+  font-size: 0.85rem;
+  color: var(--faded-ink);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+footer::before {
+  content: '⚘';
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: var(--label-border);
+}
+
+/* Typewriter Effect for Headings */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  header.hero {
+    padding: 20px;
+  }
+  
+  main.grid {
+    padding: 20px;
+  }
+  
+  nav {
+    flex-direction: column;
+  }
+}
+
+
+/* About page layout */
+.about-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 3px solid var(--label-border);
+  box-shadow: 3px 3px 8px var(--shadow);
+  flex-shrink: 0;
+}
+
+.about-text {
+  flex: 1;
+}
+
+/* Make it stack on mobile */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+  }
 }
