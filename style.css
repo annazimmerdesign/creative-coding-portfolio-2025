@@ -1,13 +1,16 @@
 /* Archival Collection Styling */
 
 :root {
-  --paper: #f5f1e3;
-  --aged-paper: #e8e4d8;
-  --ink: #2b2b2b;
-  --faded-ink: #5a5a5a;
-  --folder-tab: #d4c5a9;
-  --label-border: #8b7355;
-  --shadow: rgba(0, 0, 0, 0.15);
+  --paper: #f8f5ed;
+  --aged-paper: #ebe5d5;
+  --manila: #e8dcc4;
+  --kraft: #d4a574;
+  --ink: #2b2520;
+  --faded-ink: #6b6158;
+  --folder-tab: #c9a66b;
+  --label-border: #8b6f47;
+  --shadow: rgba(43, 37, 32, 0.2);
+  --paper-shadow: rgba(43, 37, 32, 0.15);
 }
 
 @font-face {
@@ -31,132 +34,231 @@
 
 body {
   font-family: 'Courier New', Courier, monospace;
-  background-color: #d9d3c5;
+  background-color: #a89070;
   color: var(--ink);
   line-height: 1.6;
   padding: 20px;
-  background-image: 
+  /* background-image: 
     repeating-linear-gradient(
       0deg,
       transparent,
-      transparent 2px,
-      rgba(0,0,0,.02) 2px,
-      rgba(0,0,0,.02) 4px
-    );
+      transparent 3px,
+      rgba(0,0,0,.03) 3px,
+      rgba(0,0,0,.03) 6px
+    ),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence baseFrequency="0.9" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05"/></svg>'); */
 }
 
 /* Header - File Cabinet Tab */
 header.hero {
-  background-color: var(--folder-tab);
-  border: 2px solid var(--label-border);
+  background: linear-gradient(180deg, var(--folder-tab) 0%, #c19a5f 100%);
+  border: 3px solid var(--label-border);
   border-bottom: none;
-  padding: 30px 40px 20px;
+  padding: 30px 40px 0px;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05);
+  box-shadow: 
+    inset 0 -15px 30px rgba(0,0,0,0.08),
+    inset 0 2px 0 rgba(255,255,255,0.1);
+  border-radius: 10px 10px 0 0;
 }
 
+/* Tab label on folder */
 header.hero::before {
   content: '';
   position: absolute;
   top: 0;
   left: 40px;
-  width: 200px;
-  height: 15px;
-  background-color: var(--folder-tab);
+  width: 180px;
+  height: 18px;
+  background-color: var(--kraft);
   border: 2px solid var(--label-border);
   border-bottom: none;
   transform: translateY(-100%);
-  border-radius: 8px 8px 0 0;
+  border-radius: 6px 6px 0 0;
+  box-shadow: inset 0 -3px 8px rgba(0,0,0,0.1);
 }
 
+
+
 header.hero h1 {
-  font-family: 'GOUDOSB','Courier New', Courier, monospace;
+  font-family: 'GOUDOSB', 'Courier New', Courier, monospace;
   font-size: 1.8rem;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   color: var(--ink);
   margin-bottom: 15px;
-  border-bottom: 2px solid var(--label-border);
+  border-bottom: 3px double var(--label-border);
   padding-bottom: 10px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 }
 
-/* Navigation - Index Cards */
+/* Navigation - File Folder Tabs */
 nav {
   display: flex;
-  gap: 15px;
-  margin-top: 15px;
+    color: var(--ink);
+
+  gap: 8px;
+  margin-top: 0;
+  position: relative;
+  z-index: 10;
+}
+
+nav::before {
+  content: '';
+    color: var(--ink);
+
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1100px;
+  height: 5px;
+  background: var(--manila);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 
+    4px 4px 12px var(--shadow),
+    inset 0 -10px 20px rgba(0,0,0,0.05);
+  opacity: 0;
+  transition: all 0.1s ease;
+}
+
+nav:has(a:hover)::before {
+  opacity: 1;
+  bottom: -20px;
+  height: 30px;
 }
 
 nav a {
-  background-color: var(--aged-paper);
-  color: var(--ink);
+  /* background: linear-gradient(180deg, var(--aged-paper) 0%, var(--manila) 100%);  color: var(--ink); */
+  background: var(--manila);
+    color: var(--ink);
+
   text-decoration: none;
-  padding: 8px 20px;
-  border: 1px solid var(--label-border);
-  font-size: 0.9rem;
+  padding: 12px 30px;
+  border: none;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.2s;
-  box-shadow: 2px 2px 4px var(--shadow);
+  letter-spacing: 0.08em;
+  transition: all 0.25s ease;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 
+    0 -2px 8px var(--shadow),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+  transform: translateY(2px);
+  position: relative;
+  overflow: visible;
 }
 
+/* Tab extension */
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: -10px;
+  right: -10px;
+  height: 12px;
+  background: var(--manila);  
+  clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
+  transition: all 0.25s ease;
+}
+
+
+/* Folder body rises on hover */
+nav a:hover::before {
+  opacity: 1;
+  bottom: -40px; /* Rises just a bit */
+    background: var(--manila);
+
+}
 nav a:hover {
-  background-color: var(--paper);
-  transform: translateY(-2px);
-  box-shadow: 3px 3px 6px var(--shadow);
+    background: var(--manila);
+  transform: translateY(-8px); /* Pulls up more */
+  box-shadow: 
+    0 -6px 16px var(--shadow),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+nav a:hover::after {
+  background: var(--manila);
+  height: 16px; /* Extends the tab connection */
+}
+
+/* Folder body rises on hover */
+nav a:hover::before {
+  opacity: 1;
+  bottom: -30px; /* Rises up closer to tab */
+  height: 30px; /* Gets taller */ 
+    background: var(--manila);
+
 }
 
 /* Main Content - Folder Interior */
 main.grid {
-  background-color: var(--paper);
-  border: 2px solid var(--label-border);
-  border-top: none;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--aged-paper) 100%);
+  border: 3px solid var(--label-border);
+  border-top: 2px solid var(--label-border);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 50px;
   min-height: 70vh;
   box-shadow: 
-    5px 5px 15px var(--shadow),
-    inset 0 0 100px rgba(139, 115, 85, 0.03);
-}
-
-/* Collection Cards - Museum Labels */
-.card {
-  background-color: var(--aged-paper);
-  border: 3px double var(--label-border);
-  padding: 30px;
-  margin-bottom: 30px;
-  box-shadow: 3px 3px 8px var(--shadow);
+    8px 8px 20px var(--shadow),
+    inset 0 0 150px rgba(139, 111, 71, 0.04),
+    inset 0 1px 0 rgba(255,255,255,0.3);
   position: relative;
 }
 
+
+
+/* Collection Cards - Museum Labels */
+.card {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 2px solid var(--label-border);
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 
+    5px 5px 12px var(--paper-shadow),
+    inset 0 0 50px rgba(255,255,255,0.5);
+  position: relative;
+  border-radius: 2px;
+}
+
+/* Stamp effect on card */
 .card::before {
   content: 'ACCESSION NO. ' attr(data-accession);
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 0.7rem;
-  color: var(--faded-ink);
-  letter-spacing: 0.1em;
+  top: 15px;
+  right: 20px;
+  font-size: 0.65rem;
+  color: #8b3a3a;
+  letter-spacing: 0.12em;
+  padding: 8px 12px;
+  border: 2px solid #8b3a3a;
+  border-radius: 3px;
+  transform: rotate(3deg);
+  background-color: rgba(255,255,255,0.8);
+  font-weight: bold;
 }
 
 .card h2 {
   font-family: "GOUDOSB", Georgia, serif;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
+  font-size: 1.6rem;
+  margin-bottom: 18px;
   color: var(--ink);
-  border-bottom: 1px solid var(--label-border);
-  padding-bottom: 8px;
+  border-bottom: 2px solid var(--label-border);
+  padding-bottom: 10px;
   font-style: italic;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
 .card p {
   font-size: 1rem;
   margin-bottom: 15px;
   color: var(--faded-ink);
+  line-height: 1.7;
 }
 
 .card ul {
@@ -164,10 +266,9 @@ main.grid {
   padding-left: 0;
 }
 
-/* Only add arrows to list items */
 .card ul li {
-  margin-bottom: 12px;
-  padding-left: 20px;
+  margin-bottom: 14px;
+  padding-left: 25px;
   position: relative;
 }
 
@@ -176,9 +277,9 @@ main.grid {
   position: absolute;
   left: 0;
   color: var(--label-border);
+  font-size: 0.9em;
 }
 
-/* Make sure links don't get arrows */
 .card ul li a {
   padding-left: 0;
   position: static;
@@ -192,84 +293,92 @@ main.grid {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--label-border);
-  text-decoration-style: dotted;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
   transition: all 0.2s;
 }
 
 .card a:hover {
   color: var(--label-border);
-  text-decoration-style: solid;
+  text-decoration-thickness: 2px;
 }
 
 /* Intro Card Styling */
 .card.intro {
-  background-color: var(--paper);
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
   border-style: solid;
-  border-width: 2px;
+  border-width: 3px;
+  box-shadow: 
+    6px 6px 15px var(--paper-shadow),
+    inset 0 0 80px rgba(255,255,255,0.6);
 }
 
 .card.intro img {
   display: block;
   margin: 20px auto;
-  border: 3px solid var(--label-border);
-  box-shadow: 3px 3px 8px var(--shadow);
+  border: 4px solid var(--label-border);
+  box-shadow: 
+    5px 5px 15px var(--shadow),
+    inset 0 0 20px rgba(0,0,0,0.05);
 }
 
 /* p5.js Sketch Container */
 .card iframe {
   width: 100%;
   min-height: 600px;
-  border: 3px solid var(--label-border);
+  border: 4px solid var(--label-border);
   background-color: white;
-  box-shadow: inset 0 0 10px var(--shadow);
+  box-shadow: 
+    inset 0 0 20px var(--shadow),
+    0 4px 10px var(--paper-shadow);
+  border-radius: 2px;
 }
 
 /* Footer - Archive Stamp */
 footer {
   max-width: 1200px;
-  margin: 30px auto 0;
+  margin: 40px auto 0;
   text-align: center;
-  padding: 20px;
-  background-color: var(--aged-paper);
-  border: 2px dashed var(--label-border);
-  font-size: 0.85rem;
+  padding: 25px;
+  background: linear-gradient(135deg, var(--aged-paper) 0%, var(--manila) 100%);
+  border: 3px double var(--label-border);
+  font-size: 0.8rem;
   color: var(--faded-ink);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  box-shadow: 4px 4px 12px var(--shadow);
+  border-radius: 3px;
+  position: relative;
 }
 
 footer::before {
   content: '⚘';
   display: block;
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+  margin-bottom: 12px;
+  font-size: 1.8rem;
   color: var(--label-border);
+  text-shadow: 0 1px 2px var(--shadow);
 }
 
-/* Typewriter Effect for Headings */
-@media (max-width: 768px) {
-  body {
-    padding: 10px;
-  }
-  
-  header.hero {
-    padding: 20px;
-  }
-  
-  main.grid {
-    padding: 20px;
-  }
-  
-  nav {
-    flex-direction: column;
-  }
+/* Typewriter stamp effect */
+footer::after {
+  content: 'FILED';
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 0.7rem;
+  color: #8b3a3a;
+  letter-spacing: 0.2em;
+  padding: 5px 10px;
+  border: 2px solid #8b3a3a;
+  transform: rotate(-8deg);
+  font-weight: bold;
 }
-
 
 /* About page layout */
 .about-content {
   display: flex;
-  gap: 30px;
+  gap: 35px;
   align-items: flex-start;
 }
 
@@ -277,9 +386,11 @@ footer::before {
   width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 15px;
-  border: 3px solid var(--label-border);
-  box-shadow: 3px 3px 8px var(--shadow);
+  border-radius: 3px;
+  border: 4px solid var(--label-border);
+  box-shadow: 
+    5px 5px 15px var(--shadow),
+    inset 0 0 30px rgba(0,0,0,0.05);
   flex-shrink: 0;
 }
 
@@ -287,8 +398,25 @@ footer::before {
   flex: 1;
 }
 
-/* Make it stack on mobile */
+/* Responsive */
 @media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  header.hero {
+    padding: 20px 20px 0;
+  }
+  
+  main.grid {
+    padding: 25px;
+  }
+  
+  nav {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
   .about-content {
     flex-direction: column;
   }
