@@ -1,4 +1,3 @@
-/* Archival Collection Styling */
 
 :root {
   --paper: #f8f5ed;
@@ -38,15 +37,6 @@ body {
   color: var(--ink);
   line-height: 1.6;
   padding: 20px;
-  /* background-image: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0,0,0,.03) 3px,
-      rgba(0,0,0,.03) 6px
-    ),
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence baseFrequency="0.9" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05"/></svg>'); */
 }
 
 /* Header - File Cabinet Tab */
@@ -104,6 +94,7 @@ nav {
   margin-top: 0;
   position: relative;
   z-index: 10;
+  padding-left: 100px;
 }
 
 nav::before {
@@ -123,12 +114,27 @@ nav::before {
     inset 0 -10px 20px rgba(0,0,0,0.05);
   opacity: 0;
   transition: all 0.1s ease;
+  z-index: -1;
+}
+
+nav::after {
+  content: '';
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1120px;
+  height: 35px;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--aged-paper) 100%);
+  z-index: 1;
+  pointer-events: none; 
 }
 
 nav:has(a:hover)::before {
   opacity: 1;
   bottom: -20px;
   height: 30px;
+  z-index: -1;
 }
 
 nav a {
@@ -150,6 +156,7 @@ nav a {
   transform: translateY(2px);
   position: relative;
   overflow: visible;
+  z-index: -1;
 }
 
 /* Tab extension */
@@ -163,6 +170,7 @@ nav a::after {
   background: var(--manila);  
   clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
   transition: all 0.25s ease;
+  z-index: -1;
 }
 
 
@@ -171,27 +179,31 @@ nav a:hover::before {
   opacity: 1;
   bottom: -40px; /* Rises just a bit */
     background: var(--manila);
+    z-index: -1;
 
 }
 nav a:hover {
     background: var(--manila);
-  transform: translateY(-8px); /* Pulls up more */
+  transform: translateY(-8px); 
   box-shadow: 
     0 -6px 16px var(--shadow),
     inset 0 1px 0 rgba(255,255,255,0.6);
+    z-index: -1;
 }
 
 nav a:hover::after {
   background: var(--manila);
-  height: 16px; /* Extends the tab connection */
+  height: 16px;
+  z-index: -1;
 }
 
 /* Folder body rises on hover */
 nav a:hover::before {
   opacity: 1;
-  bottom: -30px; /* Rises up closer to tab */
-  height: 30px; /* Gets taller */ 
-    background: var(--manila);
+  bottom: -30px;
+  height: 30px;  
+  background: var(--manila);
+  z-index: -1;
 
 }
 
@@ -209,6 +221,7 @@ main.grid {
     inset 0 0 150px rgba(139, 111, 71, 0.04),
     inset 0 1px 0 rgba(255,255,255,0.3);
   position: relative;
+  z-index: 5;
 }
 
 
@@ -398,7 +411,6 @@ footer::after {
   flex: 1;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   body {
     padding: 10px;
